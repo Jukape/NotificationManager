@@ -3,10 +3,11 @@
           package="net.sepiroth887.brokeit.notificationmanager"
           android:versionCode="1"
           android:versionName="1.0">
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <application android:label="@string/app_name" android:icon="@drawable/ic_launcher">
         <activity android:name="net.sepiroth887.brokeit.notificationmanager.NotificationManagerActivity"
                   android:label="@string/app_name">
@@ -20,8 +21,16 @@
                  android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
                  android:enabled="true">
             <intent-filter>
-                <action android:name="android.service.notification.NotificationListenerService" />
+                <action android:name="android.service.notification.NotificationListenerService"/>
             </intent-filter>
         </service>
+        <receiver android:enabled="true"
+                  android:name="net.sepiroth887.brokeit.notificationmanager.OnBootServiceStart"
+                  android:permission="android.permission.RECEIVE_BOOT_COMPLETE">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </receiver>
     </application>
 </manifest>
